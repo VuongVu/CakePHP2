@@ -146,18 +146,9 @@
 		           	<tr>
 		           		<td>
 		           			<div style="position: absolute;">
-		           				<?php  
-		           					echo $this->Html->link(
-		           						'<span class="glyphicon glyphicon-plus" style="color: #18bc9c"></span>',
-		           						'',
-		           						array(
-		           							'id' => $customer['Customer']['id'],
-		           							'class' => 'btn btn-xs btn-success btn-addrow',
-		           							'style' => 'background: none; border: none; padding: 15px 0; margin-left: -8px; margin-bottom: -33px; position: relative;',
-		           							'escape' => false
-		           						)
-		           					)
-		           				?>
+		           				<a class="btn btn-xs btn-success btn-addrow" style="background: none; border: none; padding: 15px 0; margin-left: -8px; margin-bottom: -33px; position: relative;">
+                                    <span class="glyphicon glyphicon-plus" style="color: #18bc9c"></span>
+                                </a>
 		           			</div>
 		           			<?php echo $customer['Customer']['id'] ?>
 		           		</td>
@@ -258,8 +249,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		var dataTable;
-		var rowIndex;
 		var options = {
 			'scrollY': 200,
 			'scrollX': true,
@@ -269,32 +258,18 @@
 			'bAutoWidth': false
 		};
 
-		function initDataTable() {
-			dataTable = $('#searchResult').DataTable(options);
-		}
+		var dataTable = $('#searchResult').DataTable(options);
 
-		function attachClickHandler() {
-		    $('#searchResult tbody tr a').click(function(event) {
-		        var rowIndex = $('').index();
-		        alert(rowIndex);
-		    });
-		}
+		var newRow = '<tr>' + 
+				'<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' +
+				'<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' +
+				'<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' +
+				'</tr>';
 
 		$('.btn-addrow').click(function() {
-			var index = rowIndex;
-			// var newRow = '<tr>' + 
-			// 	'<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' +
-			// 	'<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' +
-			// 	'<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' +
-			// 	'</tr>';
-			// dataTable.fnDestroy();
-		 //    $("#searchResult tbody tr").eq(index).after(newRow);    
-		 //    initDataTable();
-		 //    attachClickHandler();
-
+			dataTable.row.add([
+				'','','','','','','','','','','','','','','','','','',''
+			]).draw(false).node();
 		});
-
-		initDataTable();
-		attachClickHandler();
 	});
 </script>
