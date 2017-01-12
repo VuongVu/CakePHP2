@@ -1,0 +1,223 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.2.1
+-- Dumped by pg_dump version 9.2.1
+-- Started on 2017-01-12 13:21:26
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 172 (class 3079 OID 11727)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 1938 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 171 (class 1259 OID 40713)
+-- Name: customers; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE customers (
+    id integer NOT NULL,
+    company character varying(50),
+    department_1 character varying(30),
+    department_2 character varying(30),
+    name character varying(30),
+    "position" character varying(30),
+    postal_code character varying(30),
+    address_1 character varying(30),
+    address_2 character varying(30),
+    address_3 character varying(30),
+    phone_company character varying(30),
+    phone_extension character varying(30),
+    phone_mobile character varying(30),
+    cube_tantousha character varying(30),
+    ki character varying(30),
+    soufu boolean,
+    tantou character varying(30)
+);
+
+
+ALTER TABLE public.customers OWNER TO postgres;
+
+--
+-- TOC entry 170 (class 1259 OID 40711)
+-- Name: customers_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE customers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.customers_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1939 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: customers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE customers_id_seq OWNED BY customers.id;
+
+
+--
+-- TOC entry 1940 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: customers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('customers_id_seq', 2, true);
+
+
+--
+-- TOC entry 169 (class 1259 OID 40689)
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    username character varying(30),
+    email character varying(50) NOT NULL,
+    password character varying(50) NOT NULL,
+    role character varying(30),
+    created date DEFAULT ('now'::text)::date,
+    modified date
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- TOC entry 168 (class 1259 OID 40687)
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1941 (class 0 OID 0)
+-- Dependencies: 168
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- TOC entry 1942 (class 0 OID 0)
+-- Dependencies: 168
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('users_id_seq', 3, true);
+
+
+--
+-- TOC entry 1924 (class 2604 OID 40716)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY customers ALTER COLUMN id SET DEFAULT nextval('customers_id_seq'::regclass);
+
+
+--
+-- TOC entry 1922 (class 2604 OID 40692)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- TOC entry 1930 (class 0 OID 40713)
+-- Dependencies: 171
+-- Data for Name: customers; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO customers (id, company, department_1, department_2, name, "position", postal_code, address_1, address_2, address_3, phone_company, phone_extension, phone_mobile, cube_tantousha, ki, soufu, tantou) VALUES (1, 'Cube System', 'A-1', 'A-2', 'Vu', 'PG', '12345', 'QGV', NULL, NULL, '083333388', NULL, '01642799221', 'Hien', '9', true, 'Mai');
+INSERT INTO customers (id, company, department_1, department_2, name, "position", postal_code, address_1, address_2, address_3, phone_company, phone_extension, phone_mobile, cube_tantousha, ki, soufu, tantou) VALUES (2, 'TMA', 'A-2', 'A-3', 'Dien', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO customers (id, company, department_1, department_2, name, "position", postal_code, address_1, address_2, address_3, phone_company, phone_extension, phone_mobile, cube_tantousha, ki, soufu, tantou) VALUES (3, 'Cube System', 'A-1', 'A-2', 'Hien', 'PG', '12345', 'QGV', NULL, NULL, '083333388', NULL, '01642799221', 'Hien', '9', true, 'Mai');
+
+
+--
+-- TOC entry 1929 (class 0 OID 40689)
+-- Dependencies: 169
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO users (id, username, email, password, role, created, modified) VALUES (2, 'hien', 'hien@gmail.com', 'qweewq', 'user', '2017-01-10', NULL);
+INSERT INTO users (id, username, email, password, role, created, modified) VALUES (3, 'dien', 'dien@gmail.com', 'asddsa', 'user', '2017-01-10', NULL);
+INSERT INTO users (id, username, email, password, role, created, modified) VALUES (1, 'vuongvu', 'vu@gmail.com', '123321', 'admin', '2017-01-10', NULL);
+
+
+--
+-- TOC entry 1928 (class 2606 OID 40718)
+-- Name: customers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY customers
+    ADD CONSTRAINT customers_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1926 (class 2606 OID 40694)
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1937 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2017-01-12 13:21:27
+
+--
+-- PostgreSQL database dump complete
+--
+

@@ -282,7 +282,6 @@
 
 		$('.btn-addrow').click(function() {
 			var index = rowIndex;
-			alert(index);
 			// var newRow = '<tr>' + 
 			// 	'<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' +
 			// 	'<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' +
