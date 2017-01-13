@@ -142,11 +142,12 @@
 		            </tr>
 		        </thead>
 				<tbody>
-					<?php foreach ($customers as $customer): ?>
-		           	<tr>
+					<?php $rowIndex = 0; ?>
+					<?php foreach ($customers as $customer): ?>				
+		           	<tr id="<?php echo $customer['Customer']['id'] ?>">
 		           		<td>
 		           			<div style="position: absolute;">
-		           				<a class="btn btn-xs btn-success btn-addrow" style="background: none; border: none; padding: 15px 0; margin-left: -8px; margin-bottom: -33px; position: relative;">
+		           				<a id="<?php echo $rowIndex++; ?>" class="btn btn-xs btn-success btn-addrow" style="background: none; border: none; padding: 15px 0; margin-left: -8px; margin-bottom: -33px; position: relative;">
                                     <span class="glyphicon glyphicon-plus" style="color: #18bc9c"></span>
                                 </a>
 		           			</div>
@@ -267,9 +268,23 @@
 				'</tr>';
 
 		$('.btn-addrow').click(function() {
+			var currentPage = dataTable.page();
+			var rowIndex = $(this).attr('id'),
+				rowCount = dataTable.data().length - 1,
+				insertedRow = dataTable.row(rowCount).data(),
+        		tempRow;
+			
 			dataTable.row.add([
 				'','','','','','','','','','','','','','','','','','',''
-			]).draw(false).node();
+			]).draw();
+
+			for(var i = rowCount; i > rowIndex; i--){
+				tempRow = dataTable.row(i - 1).data();
+				dataTable.row(i).data(tempRow);
+        		dataTable.row(i - 1).data(insertedRow);
+			}
+
+			dataTable.page(currentPage).draw(false);
 		});
 	});
 </script>
