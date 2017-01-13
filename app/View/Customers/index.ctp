@@ -1,6 +1,11 @@
 <?php  
 	echo $this->Html->css('https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css');
-	echo $this->Html->script('https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js');
+	echo $this->Html->script(
+		array(
+			'https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js',
+			'customer.js'
+		)
+	);
 ?>
 
 <div class="container">
@@ -247,44 +252,3 @@
 		</div>
 	</div>
 </div>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		var options = {
-			'scrollY': 200,
-			'scrollX': true,
-			'bFilter': false,
-			'bInfo': false,
-			'bPaginate': false,
-			'bAutoWidth': false
-		};
-
-		var dataTable = $('#searchResult').DataTable(options);
-
-		var newRow = '<tr>' + 
-				'<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' +
-				'<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' +
-				'<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' + '<td></td>' +
-				'</tr>';
-
-		$('.btn-addrow').click(function() {
-			var currentPage = dataTable.page();
-			var rowIndex = $(this).attr('id'),
-				rowCount = dataTable.data().length - 1,
-				insertedRow = dataTable.row(rowCount).data(),
-        		tempRow;
-			
-			dataTable.row.add([
-				'','','','','','','','','','','','','','','','','','',''
-			]).draw();
-
-			for(var i = rowCount; i > rowIndex; i--){
-				tempRow = dataTable.row(i - 1).data();
-				dataTable.row(i).data(tempRow);
-        		dataTable.row(i - 1).data(insertedRow);
-			}
-
-			dataTable.page(currentPage).draw(false);
-		});
-	});
-</script>
